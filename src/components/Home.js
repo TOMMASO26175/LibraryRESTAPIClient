@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Card, Container } from "react-bootstrap";
-import apiPath from "../Config";
+import apiPath from "../Config.js";
 export default class Home extends React.Component {
     constructor(props) {
         super(props);

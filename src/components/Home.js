@@ -1,9 +1,9 @@
 import React from "react";
 import { Table, Card, Container } from "react-bootstrap";
-import apiPath from "../Config.js";
+import apiPath from "../Config";
 export default class Home extends React.Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
         this.state = {
             books: [],
         };
@@ -11,11 +11,11 @@ export default class Home extends React.Component {
 
     componentDidMount() {
         fetch(apiPath + "/api/book/all")
-            .then((response) => {
+            .then(async response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error ${response.status}`);
                 }
-                return response.json();
+                return await response.json();
             })
             .then((books) =>
                 this.setState({ books })
@@ -44,6 +44,7 @@ export default class Home extends React.Component {
                     {this.state.books.map((book) => {
                         return [
                             <tr key={book.ISBN}>
+                                <th>{book.ISBN}</th>
                                 <th>{book.Autore}</th>
                                 <th>{book.Titolo}</th>
                                 <th>{book.Quantity}</th>

@@ -9,30 +9,41 @@ class UpdateBook extends Component {
       bookISBN: " ",
       bookTitle: " ",
       bookAuthor: " ",
-      added: false
+      added: null,
+      error: " "
     };
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      let res = await fetch(apiPath + "/api/aziende/add", {
-        method: "PUT",
-        body: JSON.stringify({
-          ISBN: this.state.bookISBN,
-          Autore: this.state.bookAuthor,
-          Titolo: this.state.bookTitle
-        }),
-        headers: {
-          "Content-type": "application/json",
-        },
-      });
+    var details = {
+        'ISBN': this.state.bookISBN,
+        'Autore': this.state.bookAuthor,
+        'Titolo': this.state.bookTitle
+    };
+    
+    var formBody = [];
+    for (var property in details) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(details[property]);
+      formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
 
-      if (res.status === 200) {
-        console.log("Ok");
+    try {
+      let res = await fetch(apiPath + "/api/book/update", {
+        method: "PUT",
+        body: formBody,
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        }
+      });
+      
+      if(res.status === 200) {
         this.setState({ added: true })
-      } else {
-        console.log("Error number:" + res.status);
+      }else{
+        res.json().then(data => this.setState({ error: data }))
+        this.setState({ added: false })
       }
     } catch (err) {
       console.log(err);
@@ -50,6 +61,14 @@ class UpdateBook extends Component {
             </Card> 
           </div>
         );
+        case false:
+            return(
+              <div>
+                <Card bg='danger' className="col-md-5 mx-auto text-center">
+                  <Card.Body>Error:{this.state.error}</Card.Body>
+                </Card> 
+              </div>
+            );
       default:
         return (
           <div>

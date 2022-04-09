@@ -3,6 +3,7 @@ import Home from "./components/Home.js"
 import {Route, BrowserRouter, Routes} from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import DefNavbar from "./components/Navbar.js";
+import UpdateBook from "./components/UpdateBook.js"
 const App = () => {
   window.onbeforeunload = null;
 
@@ -14,6 +15,7 @@ const App = () => {
               <DefNavbar/>
               <Routes>
                 <Route path="/" element={<Home/>} />
+                <Route path="/update" element={<UpdateBook/>} />
               </Routes>
             </Col>
           </Row>

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import apiPath from "../Config";
 
-class AddBook extends Component {
+class DeleteBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,17 +14,7 @@ class AddBook extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    var details = {
-        'ISBN': this.state.bookISBN
-    };
-    
-    var formBody = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
+    var formBody = new URLSearchParams({'ISBN': this.state.bookISBN});
 
     try {
       let res = await fetch(apiPath + "/api/book/delete", {
@@ -53,7 +43,7 @@ class AddBook extends Component {
         return(
           <div>
             <Card bg='success' className="col-md-5 mx-auto text-center">
-              <Card.Body>Libro aggiunto con successo</Card.Body>
+              <Card.Body>Libro rimosso con successo</Card.Body>
             </Card> 
           </div>
         );
@@ -91,4 +81,4 @@ class AddBook extends Component {
   }
 }
 
-export default AddBook;
+export default DeleteBook;

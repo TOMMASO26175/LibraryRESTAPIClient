@@ -11,6 +11,9 @@ export default class DefNavbar extends React.Component {
                         <Nav.Link href="/update">UpdateBook</Nav.Link>
                         <Nav.Link href="/add">AddBook</Nav.Link>
                         <Nav.Link href="/delete">DeleteBook</Nav.Link>
+                        <Nav.Link href="/rent">RentBook</Nav.Link>
+                        <Nav.Link href="/return">ReturnBook</Nav.Link>
+                        <Nav.Link href="/expiries">Expiries</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>

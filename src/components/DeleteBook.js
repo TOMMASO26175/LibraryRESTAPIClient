@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import apiPath from "../Config";
 
-class UpdateBook extends Component {
+class AddBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bookISBN: "",
-      bookTitle: "",
-      bookAuthor: "",
       added: null,
       error: " "
     };
@@ -17,9 +15,7 @@ class UpdateBook extends Component {
   handleSubmit = async (e) => {
     e.preventDefault();
     var details = {
-        'ISBN': this.state.bookISBN,
-        'Autore': this.state.bookAuthor,
-        'Titolo': this.state.bookTitle
+        'ISBN': this.state.bookISBN
     };
     
     var formBody = [];
@@ -31,8 +27,8 @@ class UpdateBook extends Component {
     formBody = formBody.join("&");
 
     try {
-      let res = await fetch(apiPath + "/api/book/update", {
-        method: "PUT",
+      let res = await fetch(apiPath + "/api/book/delete", {
+        method: "DELETE",
         body: formBody,
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -57,7 +53,7 @@ class UpdateBook extends Component {
         return(
           <div>
             <Card bg='success' className="col-md-5 mx-auto text-center">
-              <Card.Body>Libro aggiornato con successo</Card.Body>
+              <Card.Body>Libro aggiunto con successo</Card.Body>
             </Card> 
           </div>
         );
@@ -73,7 +69,7 @@ class UpdateBook extends Component {
         return (
           <div>
             <Card className="text-center">
-              <Card.Body>Aggiorna un libro</Card.Body>
+              <Card.Body>Inserisci l'isbn del libro che vuoi eliminare</Card.Body>
             </Card>
             <Form>
               <Form.Group className="mb-3">
@@ -83,26 +79,6 @@ class UpdateBook extends Component {
                   placeholder="ISBN"
                   value={this.state.bookISBN}
                   onChange={(e) => this.setState({ bookISBN: e.target.value })}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Autore Libro</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Autore"
-                  value={this.state.bookAuthor}
-                  onChange={(e) => this.setState({ bookAuthor: e.target.value })}
-                />
-              </Form.Group>
-
-              <Form.Group className="mb-3">
-                <Form.Label>Titolo Libro</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Titolo"
-                  value={this.state.bookTitle}
-                  onChange={(e) => this.setState({ bookTitle: e.target.value })}
                 />
               </Form.Group>
               <Button variant="primary" type="submit" onClick={this.handleSubmit}>
@@ -115,4 +91,4 @@ class UpdateBook extends Component {
   }
 }
 
-export default UpdateBook;
+export default AddBook;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 import apiPath from "../Config";
 
-class UpdateBook extends Component {
+class AddBook extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -31,8 +31,8 @@ class UpdateBook extends Component {
     formBody = formBody.join("&");
 
     try {
-      let res = await fetch(apiPath + "/api/book/update", {
-        method: "PUT",
+      let res = await fetch(apiPath + "/api/book/add", {
+        method: "POST",
         body: formBody,
         headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -57,7 +57,7 @@ class UpdateBook extends Component {
         return(
           <div>
             <Card bg='success' className="col-md-5 mx-auto text-center">
-              <Card.Body>Libro aggiornato con successo</Card.Body>
+              <Card.Body>Libro aggiunto con successo</Card.Body>
             </Card> 
           </div>
         );
@@ -73,7 +73,7 @@ class UpdateBook extends Component {
         return (
           <div>
             <Card className="text-center">
-              <Card.Body>Aggiorna un libro</Card.Body>
+              <Card.Body>Inserisci un libro</Card.Body>
             </Card>
             <Form>
               <Form.Group className="mb-3">
@@ -115,4 +115,4 @@ class UpdateBook extends Component {
   }
 }
 
-export default UpdateBook;
+export default AddBook;

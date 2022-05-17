@@ -9,7 +9,7 @@ import DeleteBook from "./components/DeleteBook"
 import RentBook from "./components/RentBook"
 import ReturnBook from "./components/ReturnBook"
 import RentExpiries from "./components/RentExpiries"
-
+import FilterBooks from "./components/Filterbooks"
 const App = () => {
   window.onbeforeunload = null;
 
@@ -27,6 +27,7 @@ const App = () => {
                 <Route path="/rent" element={<RentBook/>} />
                 <Route path="/return" element={<ReturnBook/>} />
                 <Route path="/expiries" element={<RentExpiries/>} />
+                <Route path="/filter" element={<FilterBooks/>} />
               </Routes>
             </Col>
           </Row>

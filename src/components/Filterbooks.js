@@ -8,19 +8,18 @@ export default class Filterbooks extends React.Component {
             books: [],
             autore: "",
             prezzo: "",
-            found: false,
+            found: null,
             error: null
         };
     }
 
     handleSubmit = async (e) => {
         e.preventDefault();
-        var formBody = new URLSearchParams({'Autore': this.state.autore, 'Prezzo': this.state.prezzo});
+
 
         try {
-            let res = await fetch(apiPath + "/api/book/filter", {
-                method: "POST",
-                body: formBody,
+            let res = await fetch(apiPath + "/api/book/filter" + "?Autore=" + this.state.autore + "&Prezzo=" + this.state.prezzo, {
+                method: "GET",
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
                 }
@@ -39,7 +38,7 @@ export default class Filterbooks extends React.Component {
     };
 
     render() {
-        switch(this.state.added){
+        switch(this.state.found){
             case true:
                 return(
                     <div>
